@@ -29,7 +29,7 @@
         // Check if the parameter is present
         if (urlParam) {
             // Create the backend API URL with the parameter
-            var apiUrl = 'http://localhost:8000/reward-data?token=' + encodeURIComponent(urlParam);
+            var apiUrl = 'http://localhost:8000/v1/customers/reward-data?token=' + encodeURIComponent(urlParam);
 
             // Make a GET request to the backend API
             fetch(apiUrl)
