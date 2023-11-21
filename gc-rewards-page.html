@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GET API Example</title>
+</head>
+
+<body>
+
+    <h1>GET API Example</h1>
+
+    <script>
+        // Function to extract query parameter from the URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Get the parameter from the URL
+        var urlParam = getParameterByName('token');
+
+        // Check if the parameter is present
+        if (urlParam) {
+            // Create the backend API URL with the parameter
+            var apiUrl = 'http://localhost:8000?token=' + encodeURIComponent(urlParam);
+
+            // Make a GET request to the backend API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response from the backend
+                    console.log('Backend Response:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        } else {
+            console.error('URL parameter not found.');
+        }
+    </script>
+</body>
+</html>
